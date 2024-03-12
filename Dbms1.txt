@@ -1,0 +1,79 @@
+CREATE DATABASE IF NOT EXISTS COLLEGE10;
+USE COLLEGE10;
+
+CREATE TABLE IF NOT EXISTS University (
+    University_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(100),
+    Location VARCHAR(100),
+    Institutes INT,
+    Courses VARCHAR(255)
+);
+
+INSERT INTO University (Name, Location, Institutes, Courses) VALUES
+('Example University', 'Example Location', 5, 'BA, BMSA, BCom, BSc, BSc IT, BSc DS');
+
+CREATE TABLE IF NOT EXISTS Department (
+    Dept_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Dept_Name VARCHAR(100),
+    Attributes VARCHAR(255),
+    University_ID INT,
+    FOREIGN KEY (University_ID) REFERENCES University(University_ID)
+);
+
+INSERT INTO Department (Dept_Name, Attributes, University_ID) VALUES
+('Science', 'Research, Lab Facilities, Practical Oriented', 1),
+('Commerce', 'Accounting, Business Studies, Economics', 1),
+('Arts', 'Literature, Humanities, Fine Arts', 1);
+
+CREATE TABLE IF NOT EXISTS Employee (
+    Emp_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(100),
+    Qualification VARCHAR(100),
+    Experience INT,
+    Role VARCHAR(50)
+);
+
+INSERT INTO Employee (Name, Qualification, Experience, Role) VALUES
+('Rutuja Madane', 'Masters in IT', 5, 'Teacher'),
+('Sadiq Shaikh', 'Masters in IT', 8, 'Teacher');
+
+CREATE TABLE IF NOT EXISTS Teacher (
+    Teacher_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Emp_ID INT UNIQUE,
+    FOREIGN KEY (Emp_ID) REFERENCES Employee(Emp_ID)
+);
+
+INSERT INTO Teacher (Emp_ID) VALUES
+(1),
+(2);
+
+CREATE TABLE IF NOT EXISTS Course (
+    Course_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Course_Name VARCHAR(100),
+    Dept_ID INT,
+    Teacher_ID INT,
+    FOREIGN KEY (Dept_ID) REFERENCES Department(Dept_ID),
+    FOREIGN KEY (Teacher_ID) REFERENCES Teacher(Teacher_ID)
+);
+
+INSERT INTO Course (Course_Name, Dept_ID, Teacher_ID) VALUES
+('BA', 3, 1),
+('BMSA', 3, 2),
+('BCom', 2, 1),
+('BSc', 1, 2),
+('BSc IT', 1, 1),
+('BSc DS', 1, 2);
+
+CREATE TABLE IF NOT EXISTS Student (
+    Student_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(100),
+    DOB DATE,
+    Ph_No VARCHAR(20),
+    ID_No VARCHAR(20),
+    Course_ID INT,
+    FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID)
+);
+
+SHOW DATABASES;
+USE COLLEGE10;
+SHOW TABLES;

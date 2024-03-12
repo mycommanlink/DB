@@ -1,0 +1,24 @@
+SHOW DATABASES;
+USE neeraj;
+CREATE TABLE Orders (OrderID INTEGER PRIMARY KEY,OrderDate DATE);
+CREATE TABLE Customers (CustomerID INTEGER PRIMARY KEY,CustomerName TEXT,ContactName TEXT,Country Text);
+INSERT INTO Orders VALUES (12345, '1999-09-18');
+INSERT INTO Orders VALUES (12346, '1999-09-19');
+INSERT INTO Orders VALUES (12347, '1999-09-20');
+SELECT * FROM Orders;
+INSERT INTO Customers VALUES (1, 'neeraj', 'shah', 'Dubai');
+INSERT INTO Customers VALUES (2, 'Harsh', 'Mhatre', 'Turkey');
+INSERT INTO Customers VALUES (3, 'Sanket', 'patil', 'Seria');
+SELECT * FROM Customers;
+
+SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders
+Right JOIN Customers ON Orders.OrderID = Customers.CustomerID;
+
+SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders
+Left JOIN Customers ON Orders.OrderID = Customers.CustomerID;
+
+SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders
+Inner JOIN Customers ON Orders.OrderID = Customers.CustomerID;
